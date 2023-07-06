@@ -1,5 +1,5 @@
 HELP.md
-target/
+Poseiden-skeleton/target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
