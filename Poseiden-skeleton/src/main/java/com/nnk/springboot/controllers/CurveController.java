@@ -1,6 +1,11 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.CurvePoint;
+import com.nnk.springboot.domain.User;
+import com.nnk.springboot.services.CurvePointService;
+import com.nnk.springboot.services.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,14 +16,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.validation.Valid;
 
+import java.util.List;
+
 @Controller
+@RequiredArgsConstructor
 public class CurveController {
-    // TODO: Inject Curve Point service
+
+    private final CurvePointService curvePointService;
+
+    private final UserService userService;
 
     @RequestMapping("/curvePoint/list")
-    public String home(Model model)
+    public String getCurvePoints(Model model)
     {
-        // TODO: find all Curve Point, add to model
+        List<CurvePoint> curvePoints = curvePointService.findAll();
+        User user = userService.getConnectedUser();
+        model.addAttribute("curvePoints", curvePoints);
         return "curvePoint/list";
     }
 
